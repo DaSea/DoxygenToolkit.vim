@@ -9,18 +9,18 @@
 " TODO: (Python) Check default paramareters defined as list/dictionnary/tuple
 "
 " Note: Correct insertion position and 'xxx_post' parameters.
-" 	 - Insert position is correct when g:DoxygenToolkit_compactOneLineDoc = "yes"
-" 	   and let g:DoxygenToolkit_commentType = "C++" are set.
-" 	 - When you define:
-" 	 		g:DoxygenToolkit_briefTag_pre = "@brief "
-" 	 		g:DoxygenToolkit_briefTag_post = "<++>"
-" 	 		g:DoxygenToolkit_briefTag_funcName = "yes"
-" 	   Documentation generated with these parameters is something like:
-" 	      /// @brief foo <++>
-" 	   You can configure similarly parameters to get something like:
-" 	      /// @brief foo <++>
-" 	      /// @param bar <++>
-" 	      /// @param baz <++>
+"    - Insert position is correct when g:DoxygenToolkit_compactOneLineDoc = "yes"
+"      and let g:DoxygenToolkit_commentType = "C++" are set.
+"    - When you define:
+"           g:DoxygenToolkit_briefTag_pre = "@brief "
+"           g:DoxygenToolkit_briefTag_post = "<++>"
+"           g:DoxygenToolkit_briefTag_funcName = "yes"
+"      Documentation generated with these parameters is something like:
+"         /// @brief foo <++>
+"      You can configure similarly parameters to get something like:
+"         /// @brief foo <++>
+"         /// @param bar <++>
+"         /// @param baz <++>
 "
 " Note: Position the cursor at the right position for one line documentation.
 "
@@ -480,6 +480,7 @@ function! <SID>DoxygenAuthorFunc()
   " Get file name
   let l:fileName = expand('%:t')
 
+  exec "normal gg"
   " Begin to write skeleton
   let l:insertionMode = s:StartDocumentationBlock()
   exec "normal ".l:insertionMode.s:interCommentTag.g:DoxygenToolkit_fileTag.l:fileName
@@ -1138,9 +1139,9 @@ endfunction
 """"""""""""""""""""""""""
 " Shortcuts...
 """"""""""""""""""""""""""
-command! -nargs=0 Dox :call <SID>DoxygenCommentFunc()
+command! -nargs=0 DoxFunc :call <SID>DoxygenCommentFunc()
 command! -nargs=0 DoxLic :call <SID>DoxygenLicenseFunc()
-command! -nargs=0 DoxAuthor :call <SID>DoxygenAuthorFunc()
+command! -nargs=0 DoxFile :call <SID>DoxygenAuthorFunc()
 command! -nargs=1 DoxUndoc :call <SID>DoxygenUndocumentFunc(<q-args>)
 command! -nargs=0 DoxBlock :call <SID>DoxygenBlockFunc()
 
